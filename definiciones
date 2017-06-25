@@ -1,0 +1,266 @@
+function init()
+function lockEvent( event )
+function pauseGame()
+function resumeGame()
+function pauseResumeGame()
+function getNodeList( attribute, value, tagName )	///get SVG nodes with that 'attribute' that match 'value', or all if no 'value'. All SVGs if no 'attribute'.
+function getList( attribute, value, tagName )  ///Returns list of objects, each one of its correct object type. List contains 'attribute=value', 'attribute'=(any)', or all SVGs.
+function pathIsValidPolygon( SVGNodePath )	//we assume the polygon is described by a SVG closed <PATH> without arcs or bezier curves
+function pointsFromPath( SVGNodePath )
+Array.prototype.find = function ( class, type )
+Array.prototype.findOnly = function ( class, type )
+function mainLoop()
+function doMovements( objList )		// Move the objects in the list ('objList' is an array of strings with the identifiers). Move all if no list
+function doDrawing( objList )
+function doAnimations( objList )		// Animate the objects in the list ('objList' is an array of strings with the identifiers). Animate all if no list
+function doBehaviourss( objList )		// Move the objects in the list ('objList' is an array of strings with the identifiers). Move all if no list
+function doCollisions( colTree )
+function quadTreeNode ( objList, mapWidth, mapHeight, parentNode, coordinate , x, y, depth, maxDepth, maxOcupation )
+quadTreeNode.prototype.firstLeaf = function()				//returns a pointer to the first leaf node in the subtree
+quadTreeNode.prototype.nextLeaf = function()				//returns a pointer to the next leaf node in the subtree ('undefined' if this was the last)
+quadTreeNode.prototype.corresponds = function( element )
+quadTreeNode.prototype.split = function()			//divide the node in four quadrants and populate them with the according elements
+quadTreeNode.prototype.buildTree = function( maxOcupation, maxDepth )
+quadTreeNode.prototype.insertElement = function( element )//insert the element in a node and update its subtree, if appropriate. (This doesn't update parent nodes)
+quadTreeNode.prototype.removeElement = function( element )	//remove the element from a node and all its subtree
+quadTreeNode.prototype.update = function( objList )
+function overlapPoints ( obj1, obj2 )	//return the collection of intersecting points for each object, or 'undefined'
+function calculateOverlap ( obj1, obj2, obj1Pts, obj2Pts )	//moves the two objects to correct overlapping
+function elasticImpact ( obj1, obj2, dirN, point )	//solve impact according to surfaces, or with a wall with normal 'normalDir'
+function vector( x, y )
+vector.prototype.add = function ( deltaX, deltaY )
+vector.prototype.minus = function ( deltaX, deltaY )
+vector.prototype.multiply = function ( scalar )
+vector.prototype.modulus = function ()
+vector.prototype.sqModulus = function ()	//useful for certain distance comparisons, to speed up
+vector.prototype.direction = function ()
+vector.prototype.angle = function( vec )		//returns the angle with X axis, or with vector, defined between [-PI, +PI)
+vector.prototype.angle2 = function( vec )		//returns the angle with X axis, or with vector, defined between [0, +2PI)
+function angleCheck( ang )					//makes sure an angle is expressed between [-PI, +PI)
+function angleCheck2( ang )					//makes sure an angle is expressed between [0,2PI)
+vector.prototype.project = function( vecX, vecY )
+vector.prototype.rotate = function ( angle )
+vector.prototype.equals = function ( a, b )
+function avgVector( vectorList )
+function leftMostX ( points )
+function rightMostX ( points )
+function downMostY ( points )
+function upMostY ( points )
+function axes( dirX, dirY, center )	//define new axes ( or XY axis without parameters ). Only needs the direction of one axis
+axes.prototype.project = function( vec, isFree )	//rotate vectors to work in the new axes
+axes.prototype.unproject = function( vec, isFree ) 	//rotate the result back to the original XY axes, assuming perpendicular axes
+axes.prototype.rotate = function( ang )		//only the directions, does not affect the center
+function rectangle( width, height, center, rotation )
+rectangle.prototype.samplePoints =  function( )		// creates a list of points inside the surface, in the coordinates of the center of the rectangle
+rectangle.prototype.ptsInside = function ( item )//returns the points inside the shape. Item can be a point, a list of points, or another shape
+rectangle.prototype.areaInertia = function()
+rectangle.prototype.overlapDistance = function ( point, vel )	//returns the distance from point to object boundary, in the direction of 'vel'
+rectangle.prototype.getNormal = function( point ) 			///get the normal vector in the point of collision
+function polygon( points )		//The polygon MUST be "monotone convex"
+polygon.prototype.getHeight = function()
+polygon.prototype.getWidth = function()
+polygon.prototype.area = function()
+polygon.prototype.areaInertia = function()//Calculation as the addition of triangles, assuming CONCAVE, and center of mass/rotation the center of the bounding box.
+polygon.prototype.isConvex = function ( angleList )
+polygon.prototype.ptsInside = function ( item )//returns the points inside the shape. Item can be a point, a list of points, or another shape
+polygon.prototype.overlapDistance = function ( point, vel )	//returns the distance from point to object boundary, in the direction of 'vel'
+polygon.prototype.getNormal = function( point ) 			///get the normal vector in the point of collision
+polygon.prototype.getInnerAngles  = function ()	//retreive the INNER angles between the sides of the polygon. Angles between ( 0 , 2PI )
+polygon.prototype.splitPolygon = function ( clockwise , startIndex, jump )	//split into a set of concave polygons. Returns the list of polygons
+polygon.prototype.globalPoints = function()
+polygon.prototype.isFacing = function ( point )	//returns the face (index) that is 'seeing' or 'facing' a point
+polygon.prototype.distanceFromFaceTo = function( point )
+function circle( radius, center )
+circle.prototype.samplePoints =  function( number )
+circle.prototype.ptsInside = function ( item )//returns the points inside the shape. Item can be a point, a list of points, or another shape
+circle.prototype.areaInertia = function()
+circle.prototype.overlapDistance = function ( point, vel )	//returns the distance from point to object boundary, in the direction of 'vel'
+circle.prototype.getNormal = function( point ) 			///get the normal vector in the point of collision
+function ellipse( radiusA, radiusB, center, rotation )	//radius A is the Y axis
+ellipse.prototype.samplePoints =  function( number )
+ellipse.prototype.areaInertia = function()
+ellipse.prototype.ptsInside = function ( item )//returns the points inside the shape. Item can be a point, a list of points, or another shape
+ellipse.prototype.overlapDistance = function ( point, vel )	//returns the distance from point to object boundary, in the direction of 'vel'
+ellipse.prototype.getNormal = function( point ) 			///get the normal vector in the point of collision
+function rotation( angVelocity, friction, targetAngle )
+rotation.prototype.advance = function()
+rotation.prototype.isFinished = function()
+rotation.prototype.accelerate = function ( angAcc )
+function movement ( owner, initialDir, speed, friction, oriented )
+movement.prototype.advance = function () ///Returns the increment for each frame
+movement.prototype.velocity = function ()		//returns the averaged direction of a movement, taking into account its components
+movement.prototype.isFinished = function ()
+function arrowMovement ( owner, dir, speed, friction )
+arrowMovement.prototype.addDir = function( dir, add )		//add/substract a component to the movement and return resulting direction
+arrowMovement.prototype.isFinished = function ()
+function rectMovement( owner, position, speed )
+rectMovement.prototype.advance = function()
+rectMovement.prototype.isFinished = function ()
+function landMovement( owner, destPos, speed )			//movement with a constant decceleration that ends in the destination with velocity 0
+landMovement.prototype.advance = function()
+function softMovement( owner, destPos, speed, dist ,percentage )	//hybrid movement:'rect' movement that, at a certain point becomes a land movement
+softMovement.prototype.advance = function()
+softMovement.prototype.cancelLand = function()	//cancel landing (becomes a rect movement), to use in a sequence of movements for all except the last one
+softMovement.prototype.isFinished = function()	//cancel landing (becomes a rect movement), to use in a sequence of movements for all except the last one
+function circleMovement( owner, initialDir, curvature, speed )
+circleMovement.prototype.advance = function()
+// function curvedMovement( owner, destPos, /*curvature,*/ speed )
+// curvedMovement.prototype.advance = function()
+function carMovement( owner, initialDir, inicSpeed )
+carMovement.prototype.advance = function ()
+function chaseMovement( owner, target, speed )
+chaseMovement.prototype.advance = function()
+chaseMovement.prototype.isFinished = function ()
+function fleeMovement( owner, target, speed )
+fleeMovement.prototype.advance = function()
+function detourMovement( owner, obj, target, dist, speed )		//move around a scene item
+detourMovement.prototype.advance = function()
+detourMovement.prototype.updateDir = function( target )//re-check direction to avoid the obstacle the shortest way.
+movement.prototype.randomSpeed = function( avgSpeed,stdSpeed, avgPeriod, stdPeriod )
+movement.prototype.randomCurv = function( avgCurv,stdCurv, avgPeriod, stdPeriod )
+movement.prototype.randomAngle = function( avgAngle, stdAngle, avgPeriod, stdPeriod )
+movement.prototype.randomize = function()
+
+function part( id , parentElement, shape, coordinates )	//geometric shape that is component of an element (it is attached to the element)
+part.prototype.getShape = function ( newPos, angle )		//updates the information of the part's shape and returns it.
+part.prototype.getRectangle = function()
+part.prototype.getCircle = function()
+part.prototype.getEllipse = function()
+part.prototype.velocity = function ()
+part.prototype.angVelocity = function ()
+part.prototype.pointVelocity = function( point, angVel )
+
+function item( id, coordinates )		//most basic kind of item. Does not move. Only has a position and a shape.
+  item.prototype.getPosition = function ()
+  item.prototype.drawPosition = function ( newPos )
+  item.prototype.distanceTo = function( checkPoint )			///returns distance from the center to the point
+  item.prototype.isCloserTo = function( checkPoint, radius )		///check if the element hits a point/zone
+
+  function getShape()		//updates the information of the element's bounding box and returns it. The box is never rotated, it just adjusts its dimensions
+  object.prototype = new item();		//new objects created with 'new' and this function will have this obj as their prototype to look up to
+
+function object( id, coordinates )		//inert item that has physics attributes, can move and rotate
+  object.prototype.drawPosition = function ( newPos )
+  object.prototype.drawRotation = function( angle )
+  object.prototype.velocity = function ()
+  object.prototype.angVelocity = function ()
+  object.prototype.pointVelocity = function( point, angVel )
+  object.prototype.momentInertia = function ()
+  object.prototype.setState = function ( newState, newAnimation )
+  object.prototype.setSelected = function( selected )
+  object.prototype.toggleSelected = function()
+  function selectElements( option, list )
+  object.prototype.addMovement = function( newMovement, newSpeed )			//add movement next frame
+  object.prototype.replaceMovement = function( newMovement, newSpeed )		//replace movement next frame
+  object.prototype.cancelMovements = function()				//cancels movements next frame
+  object.prototype.doMovAction = function( cancelAll )				//the instant that it is called, preformed scheduled actions synchronously
+  object.prototype.accelerate = function ( acceleration )
+  object.prototype.deccelerate = function ( decceleration )
+  object.prototype.doAccAction = function()
+  object.prototype.finishMovement = function()
+  object.prototype.cancelRotation = function()				//next frame
+  object.prototype.stop = function()					//cancels all motion INSTANTLY (use with care)
+  object.prototype.rotate = function( angle )
+  object.prototype.rotateTo = function( angle )			//rotate to the desired angle (shortest way)
+  //character.prototype.move = function ()  			//TODO
+  object.prototype.move = function ()  			//update for each frame, for both movement and rotation
+  object.prototype.moveTo = function ( destPos, append, curved )		///convenience function to make the object move towards a position, and chain movements
+
+function being( id, coordinates )			//animated object that has behaviours
+  character.prototype = new being();		//new objects created with 'new' and this function will have this obj as their prototype to look up to
+
+function character( id, coordinates )          ///'being' element controlable by the user, with inventory
+  character.prototype.animate = function ( animate )    ///Performs 'animation', or the animation corresponding to the current state if no parameters
+  character.prototype.drawInventory = function( pos, width, height, numItemsRow, leftToRight ) //Draw the inventory on the panel TODO only for 2 seconds
+  character.prototype.setCMenu = function( radius, itemSize )//layout the items in the menu in a circle
+  character.prototype.placeCMenu = function( pos )//center the circular menu at a certain position
+  character.prototype.showCMenu = function()
+  character.prototype.hideCMenu = function()
+  character.prototype.toggleCMenu = function()
+  item.prototype.removeFromMap = function()
+  character.prototype.pickItem = function( it )		//add an item to the inventory, and remove it from the game
+  character.prototype.mouse = function( event )
+  character.prototype.key = function( event )
+  character.prototype.keyStop = function( event )
+
+function behaviour( firstState, code, priority, unique )	//object with a variable state that dictates the movement behaviour of the element
+function BState( move, update, priority, time )		//state that can contain triggers to other states, and defines a movement
+function trigger ( fireFunction, nextState, priority )	//transition between states, activated by a function according to certain conditions
+BState.prototype.addTrigger = function( testFunction, nextState, priority )	//convenience function to create and add a new trigger for this state
+being.prototype.updateBehaviours = function( bhList )		//checks if any trigger needs to be executed and changes the state accordingly
+being.prototype.doBehaviours = function()		//executes the new movement if the state changed
+being.prototype.addBehaviour = function( bh )			//adds a behaviour only if it did'nt exist already
+being.prototype.removeBehaviour = function( bh )
+being.prototype.makeBasicInfBehaviour = function( move, code, priority, time )	//creates a one-state behaviour that repeats everytime a movement is finished
+being.prototype.addBasicInfBehaviour = function( move, code, priority, time )	//creates a one-state behaviour that repeats everytime a movement is finished
+being.prototype.increaseBasicInfBehaviour = function( move, code, time, incr )	//increases priority or creates behaviour
+being.prototype.addBasicBehaviour = function( move, time, priority, code )	//creates a one-state behaviour that is removed on the idle state (after a 'time')
+being.prototype.increaseBasicBehaviour = function( move, code, time, incr )	//increases priority or creates behaviour
+being.prototype.addChaseBehaviour = function( target, distance, code, basePriority )//chases the target if it gets too far, and flees from it if it gets too close
+being.prototype.addAvoidBehaviour = function( target, distance, code, maxPriority, basePriority )	//flees from the target if it gets too close
+being.prototype.makeDetourBehaviour = function( obj, distance, target, code, maxPriority, basePriority )	//moves away from and around an obstacle
+being.prototype.addDetourBehaviour = function( obj, distance, target, code, maxPriority, basePriority )	//moves away from and around an obstacle
+being.prototype.addDetourAllBehaviour = function( dist, target, code, maxPriority, basePriority )	//moves away from and around an obstacle
+being.prototype.addAvoidObstacleBehaviour = function( obj, distance, code, maxPriority, basePriority )	//flees from an obstacle
+being.prototype.addGoToBehaviour = function( destPos, code, basePriority )	//the behaviour repeatedly goes to the destination and then is removed
+being.prototype.makeGoToBehaviour = function( destPos, code, maxPriority, basePriority )	//the behaviour repeatedly goes to the destination and then is removed
+being.prototype.addKeepPositionBehaviour = function( code, basePriority )	//always tries to stay on that position
+//function groupBehaviour ( objList, init, refresh ) //TODO
+function complexBehaviour ( bhList, finishCheck ) 	//compound behaviour: mix of basic behaviours with an extra condition for finalization
+being.prototype.addComplexBehaviour = function( cbh, cbhList )
+being.prototype.removeComplexBehaviour = function( cbh, cbhList )
+being.prototype.removeAllComplexBehaviours = function( cbhList )
+being.prototype.updateComplexBehaviours = function( cbhList )	//removes c. behaviours components that have expired ( from any list, or from all behaviours )
+being.prototype.keyboardControlOrders = function()
+being.prototype.addGoToCBehaviour = function( destPos, order )		//the element goes to the location, while avoiding obstacles
+function keepPosition( objList )		//elements in list keep position
+function detour( objList, dist, target, code )		//elements in list avoid and go around scene items
+function avoidObstacles( objList, dist, code )		//elements in list avoid scenery items
+function avoidTarget ( objList, target, dist, code )	//all elements avoid the 'target'
+function avoidOthers( objList, dist, code )		//all elements keep at least a distance to the rest
+function gather ( objList, leader, dist, code )	//all elements gather in a closed formation (optionally, around a 'leader')
+function follow ( objList, leader, dist, code )	//all elements follow the 'leader'
+function followInLine ( objList, leader, dist, code )	//all elements follow the 'leader' in an ordered row
+function cancelBehaviours( objList )
+being.prototype.setBehaviourPriority = function( value, code )	//set the priority of the behaviour with code 'code' to a 'value'
+being.prototype.increaseBehaviourPriority = function( code, incr )
+function keyDown( event )
+function sceneItem( id )		//interactive item that is part of the scenery,
+sceneItem.prototype.collisionTrigger = function( obj, collisionInfo )	//executes the reaction to a collision
+sceneItem.prototype.distanceFromFaceTo = function( point )
+sceneItem.prototype.closestNormalTo = function( point )
+function map( id, viewBoxCoords, viewBoxSizeX, viewBoxSizeY ) ///coordinates are CENTER of the view box
+map.prototype.adjustViewBox = function ()
+map.prototype.setViewBox = function ( newPoint, newWidth, newHeight )			 //Set viewBox according to inner variables or input parameters.
+map.prototype.adjustScroll = function () 				 ///adjusts scrolls so that the camera does not go out of the map
+map.prototype.fromScreen = function( screenCoords )
+map.prototype.toScreen = function( mapCoords )
+map.prototype.zoomIn = function( pos, zoomFactor )
+map.prototype.zoomOut = function( pos, zoomFactor )
+map.prototype.zoom = function ( newPoint, newSizeX, newSizeY )	///set camera to this position if parameters, perform zoomState otherwise.
+map.prototype.setMaxZoom = function ( obj ) ///sets max zoom to 1.5x the size of the input object, or the biggest selected element, (or to a number)
+map.prototype.adjustZoom = function()	///adjusts if the current zoom is too big
+map.prototype.focus = function ( object, level )
+map.prototype.pan = function( dirX, dirY )
+map.prototype.follow = function ( obj, centered )			///set followed object and if the camera is centered, and/or perform the tracking.
+map.prototype.unfollow = function ()
+map.prototype.keyDown = function ( event )
+map.prototype.keyStop = function ( event )
+map.prototype.mouseClick = function ( event )	//move selected elements to the map position ( with 'shift', put in order queue )
+map.prototype.mouseDown = function ( event )
+function mouseUp ( event )
+map.prototype.mouseMove = function ( event )	//move camera when cursor is close to border
+map.prototype.wheel = function ( event )
+function selectionBox()
+selectionBox.prototype.setOrig = function ( x, y )
+selectionBox.prototype.setCorner = function ( x, y )
+selectionBox.prototype.setDimensions = function ( width, height )
+selectionBox.prototype.beginDraw = function ( x, y )
+selectionBox.prototype.reDraw = function ( x, y )
+selectionBox.prototype.unDraw = function ()
+selectionBox.prototype.getMapRectangle = function()
+function panel( id )
+item.prototype.collisionTrigger = function( obj, collisionInfo )	//executes the reaction to a collision. Returns 'false' to avoid normal elastic impact response
+object.prototype.collisionTrigger = function( obj, collisionInfo )	//executes the reaction to a collision. Returns 'false' to avoid normal elastic impact response
+being.prototype.collisionTrigger = function( obj, collisionInfo )	//executes the reaction to a collision. Returns 'false' to avoid normal elastic impact response
+character.prototype.collisionTrigger = function( obj, collisionInfo )	//executes the reaction to a collision. Returns 'false' to avoid normal elastic impact response
