@@ -17,6 +17,12 @@ I was curious of what it would take to do this, so I decided to try. This was be
  - Inventory, items, action
  - Controllable with keys or mouse. "Warcraft" group mode.
 
+The default camera mode was zoomed in and scroll following the character,
+
+This is a zoomout of the whole test-map, where you can see the poligons for collision detection (invisible in-game).
+
+![Whole map](world.png)
+
 I got bored when I had to make an actual game with it :D
 
 It was working fine around the time of FF 3. It does not work anymore.
